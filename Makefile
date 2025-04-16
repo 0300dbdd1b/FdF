@@ -5,7 +5,8 @@ IS_LINUX	:=	$(filter Linux,$(UNAME_S))
 SRCS	=	fdf.c			\
 			map-parser.c	\
 			map-drawing.c	\
-			key-hook.c
+			key-hook.c		\
+			colors.c
 
 OBJS	=	$(SRCS:.c=.o)
 

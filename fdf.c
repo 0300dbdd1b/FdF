@@ -4,7 +4,6 @@
 
 int	init_fdf(t_fdf *fdf)
 {
-
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 		return (write(2, "MLX init error\n", 15), 1);
@@ -13,6 +12,12 @@ int	init_fdf(t_fdf *fdf)
 		return (write(2, "Window error\n", 13), 1);
 	fdf->window_width = 1920;
 	fdf->window_height = 1080;
+	fdf->use_color = 1;
+	fdf->z_max = INT_MIN;
+	fdf->z_min = INT_MAX;
+	fdf->x_angle = 0;
+	fdf->y_angle = 0;
+	fdf->z_angle = 0;
 	fdf->zoom	= 10;
 	fdf->z_scale = 10;
 	fdf->x_offset = fdf->window_width / 2;
@@ -28,13 +33,12 @@ int	main(int argc, char **argv)
 	t_fdf	*fdf;
 	
 	fdf = malloc(sizeof(t_fdf));
+	init_fdf(fdf);
 	if (argc != 2)
 		return (1);
 	parse_map(fdf, argv[1]);
-	init_fdf(fdf);
 	if (!fdf)
 		return (write(2, "Map error\n", 10), 1);
-	ft_printf("Map size: width=%d, height=%d\n", fdf->map_width, fdf->map_height);
 	draw_map(fdf);
 	mlx_loop(fdf->mlx);
 	return (0);

@@ -44,7 +44,7 @@ static int	scan_dimensions(const char *filename, int *width, int *height)
 	return (1);
 }
 
-static void	fill_points(t_point *row, char *line, int y, int width)
+static void	fill_points(t_fdf *fdf, t_point *row, char *line, int y, int width)
 {
 	char	**split = ft_split(line, ' ');
 	int		x = 0;
@@ -54,6 +54,11 @@ static void	fill_points(t_point *row, char *line, int y, int width)
 		row[x].x = x;
 		row[x].y = y;
 		row[x].z = ft_atoi(split[x]);
+		if (row[x].z < fdf->z_min)
+			fdf->z_min = row[x].z;
+		if (row[x].z > fdf->z_max)
+			fdf->z_max = row[x].z;
+
 		free(split[x]);
 		x++;
 	}
@@ -97,7 +102,7 @@ int	parse_map(t_fdf *fdf, const char *filename)
 		fdf->points[y] = malloc(sizeof(t_point) * fdf->map_width);
 		if (!fdf->points[y])
 			return (free(line), free_rows(fdf->points, y), 0);
-		fill_points(fdf->points[y], line, y, fdf->map_width);
+		fill_points(fdf, fdf->points[y], line, y, fdf->map_width);
 		free(line);
 		y++;
 	}

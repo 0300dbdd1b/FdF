@@ -4,14 +4,53 @@
 
 #define SCALE 20
 
-t_point	project_iso(t_fdf *fdf, t_point p)
+
+
+
+
+t_point project_iso(t_fdf *fdf, t_point p)
 {
+	t_point rotated;
 	t_point projected;
 
-	projected.x = (p.x - p.y) * cos(0.523599) * fdf->zoom + fdf->x_offset;
-	projected.y = (p.x + p.y) * sin(0.523599) * fdf->zoom - p.z * fdf->z_scale + fdf->y_offset;
-	return (projected);
+	double center_x = fdf->map_width / 2.0;
+	double center_y = fdf->map_height / 2.0;
+	double center_z = 0;
+
+	double x = p.x - center_x;
+	double y = p.y - center_y;
+	double z = p.z - center_z;
+
+	double rx = fdf->x_angle;
+	double ry = fdf->y_angle;
+	double rz = fdf->z_angle;
+
+	// Rotation around X
+	double y1 = y * cos(rx) - z * sin(rx);
+	double z1 = y * sin(rx) + z * cos(rx);
+
+	// Rotation around Y
+	double x2 = x * cos(ry) + z1 * sin(ry);
+	double z2 = -x * sin(ry) + z1 * cos(ry);
+
+	// Rotation around Z
+	double x3 = x2 * cos(rz) - y1 * sin(rz);
+	double y3 = x2 * sin(rz) + y1 * cos(rz);
+
+	// Apply zoom and scale
+	double zoomed_x = x3 * fdf->zoom;
+	double zoomed_y = y3 * fdf->zoom;
+	double zoomed_z = z2 * fdf->z_scale;
+
+	// Isometric projection (30°)
+	double angle = 0.523599;
+	projected.x = (zoomed_x - zoomed_y) * cos(angle) + fdf->x_offset;
+	projected.y = (zoomed_x + zoomed_y) * sin(angle) - zoomed_z + fdf->y_offset;
+
+	return projected;
 }
+
+
 
 void	put_pixel(t_fdf *fdf, int x, int y, int color)
 {
@@ -55,6 +94,7 @@ void	draw_map(t_fdf *fdf)
 {
 	int	x;
 	int	y;
+	int color;
 
 	if (fdf->img)
 		mlx_destroy_image(fdf->mlx, fdf->img);
@@ -67,10 +107,11 @@ void	draw_map(t_fdf *fdf)
 		x = 0;
 		while (x < fdf->map_width)
 		{
+			color = get_color(fdf, fdf->points[y][x].z);
 			if (x + 1 < fdf->map_width)
-				draw_line(fdf, fdf->points[y][x], fdf->points[y][x + 1], 0xFFFFFF);
+				draw_line(fdf, fdf->points[y][x], fdf->points[y][x + 1], color);
 			if (y + 1 < fdf->map_height)
-				draw_line(fdf, fdf->points[y][x], fdf->points[y + 1][x], 0xFFFFFF);
+				draw_line(fdf, fdf->points[y][x], fdf->points[y + 1][x], color);
 			x++;
 		}
 		y++;
