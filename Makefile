@@ -39,23 +39,22 @@ ifndef PLATFORM
 endif
 
 
-$(NAME): $(OBJS) libft mlx
+$(NAME): $(OBJS) $(LIBFT_BIN) $(MLX_BIN)
 	$(CC) $(OBJS) $(MLX_BIN) $(LIBFT_BIN) -o $(NAME) -I $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-libft:
+$(LIBFT_BIN):
 	$(MAKE) -C $(LIBFT_DIR)
 
-mlx:
+$(MLX_BIN):
 	$(MAKE) -C $(MLX_DIR)
 
 all: $(NAME)
 
 clean:
 	rm -f $(OBJS)
-	$(MAKE) clean -C $(MLX_DIR)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean:
@@ -64,4 +63,5 @@ fclean:
 	$(MAKE) clean -C $(MLX_DIR)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
+re: fclean all
 
