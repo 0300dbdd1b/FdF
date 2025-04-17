@@ -6,7 +6,8 @@ SRCS	=	fdf.c			\
 			map-parser.c	\
 			map-drawing.c	\
 			key-hook.c		\
-			colors.c
+			colors.c		\
+			projections.c
 
 OBJS	=	$(SRCS:.c=.o)
 

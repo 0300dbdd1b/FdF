@@ -9,47 +9,47 @@
 
 
 
-t_point project_iso(t_fdf *fdf, t_point p)
-{
-	t_point rotated;
-	t_point projected;
-
-	double center_x = fdf->map_width / 2.0;
-	double center_y = fdf->map_height / 2.0;
-	double center_z = 0;
-
-	double x = p.x - center_x;
-	double y = p.y - center_y;
-	double z = (p.z - center_z) * fdf->z_scale;
-
-	double rx = fdf->x_angle;
-	double ry = fdf->y_angle;
-	double rz = fdf->z_angle;
-
-	// Rotation around X
-	double y1 = y * cos(rx) - z * sin(rx);
-	double z1 = y * sin(rx) + z * cos(rx);
-
-	// Rotation around Y
-	double x2 = x * cos(ry) + z1 * sin(ry);
-	double z2 = -x * sin(ry) + z1 * cos(ry);
-
-	// Rotation around Z
-	double x3 = x2 * cos(rz) - y1 * sin(rz);
-	double y3 = x2 * sin(rz) + y1 * cos(rz);
-
-	// Apply zoom
-	double zoomed_x = x3 * fdf->zoom;
-	double zoomed_y = y3 * fdf->zoom;
-	double zoomed_z = z2 * fdf->zoom; // (optionnel: tu peux garder z2 directement)
-
-	// Isometric projection (30°)
-	double angle = 0.523599;
-	projected.x = (zoomed_x - zoomed_y) * cos(angle) + fdf->x_offset;
-	projected.y = (zoomed_x + zoomed_y) * sin(angle) - zoomed_z + fdf->y_offset;
-
-	return projected;
-}
+/* t_point project_iso(t_fdf *fdf, t_point p) */
+/* { */
+/* 	t_point rotated; */
+/* 	t_point projected; */
+/**/
+/* 	double center_x = fdf->map_width / 2.0; */
+/* 	double center_y = fdf->map_height / 2.0; */
+/* 	double center_z = 0; */
+/**/
+/* 	double x = p.x - center_x; */
+/* 	double y = p.y - center_y; */
+/* 	double z = (p.z - center_z) * fdf->z_scale; */
+/**/
+/* 	double rx = fdf->x_angle; */
+/* 	double ry = fdf->y_angle; */
+/* 	double rz = fdf->z_angle; */
+/**/
+/* 	// Rotation around X */
+/* 	double y1 = y * cos(rx) - z * sin(rx); */
+/* 	double z1 = y * sin(rx) + z * cos(rx); */
+/**/
+/* 	// Rotation around Y */
+/* 	double x2 = x * cos(ry) + z1 * sin(ry); */
+/* 	double z2 = -x * sin(ry) + z1 * cos(ry); */
+/**/
+/* 	// Rotation around Z */
+/* 	double x3 = x2 * cos(rz) - y1 * sin(rz); */
+/* 	double y3 = x2 * sin(rz) + y1 * cos(rz); */
+/**/
+/* 	// Apply zoom */
+/* 	double zoomed_x = x3 * fdf->zoom; */
+/* 	double zoomed_y = y3 * fdf->zoom; */
+/* 	double zoomed_z = z2 * fdf->zoom; // (optionnel: tu peux garder z2 directement) */
+/**/
+/* 	// Isometric projection (30°) */
+/* 	double angle = 0.523599; */
+/* 	projected.x = (zoomed_x - zoomed_y) * cos(angle) + fdf->x_offset; */
+/* 	projected.y = (zoomed_x + zoomed_y) * sin(angle) - zoomed_z + fdf->y_offset; */
+/**/
+/* 	return projected; */
+/* } */
 
 
 
@@ -74,8 +74,8 @@ void	draw_line(t_fdf *fdf, t_point a, t_point b, int color)
 	float	x;
 	float	y;
 
-	a = project_iso(fdf, a);
-	b = project_iso(fdf, b);
+	a = project_point(fdf, a);
+	b = project_point(fdf, b);
 	dx = b.x - a.x;
 	dy = b.y - a.y;
 	steps = fmax(abs(dx), abs(dy));

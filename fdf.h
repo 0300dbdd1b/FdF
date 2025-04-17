@@ -24,6 +24,16 @@ typedef struct s_point
 	int	color;
 }	t_point;
 
+typedef enum e_projection_type
+{
+    PROJECTION_ISO,
+    PROJECTION_PARALLEL,
+    PROJECTION_CABINET,
+    PROJECTION_PERSPECTIVE,
+    PROJECTION_CONIC
+}   t_projection_type;
+typedef t_projection_type t_proj_type;
+
 typedef struct s_fdf
 {
 	int			map_height;
@@ -36,6 +46,7 @@ typedef struct s_fdf
 	t_window	window;
 	t_point		**points;
 
+	t_proj_type	projection_type;
 	int			use_color;
 	int			zoom;
 	int			x_offset;
@@ -56,6 +67,7 @@ typedef struct s_fdf
 int		parse_map(t_fdf *fdf, const char *filename);
 void	draw_map(t_fdf *fdf);
 int		handle_key(int keycode, t_fdf *fdf);
+t_point project_point(t_fdf *fdf, t_point p);
 
 int	get_color(t_fdf *fdf, int z);
 

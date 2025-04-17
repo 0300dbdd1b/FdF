@@ -13,6 +13,7 @@ int	init_fdf(t_fdf *fdf)
 	fdf->window_width = 1000;
 	fdf->window_height = 1000;
 	fdf->use_color = 1;
+	fdf->projection_type = PROJECTION_ISO;
 	fdf->z_max = INT_MIN;
 	fdf->z_min = INT_MAX;
 	fdf->x_angle = 0;

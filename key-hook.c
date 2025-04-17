@@ -53,7 +53,16 @@ int	handle_key(int keycode, t_fdf *fdf)
 	if (keycode == KEY_C)
 		fdf->z_angle -= ROTATE_STEP;
 
-	mlx_clear_window(fdf->mlx, fdf->window);
+	if (keycode == KEY_1)
+		fdf->projection_type = PROJECTION_ISO;
+	else if (keycode == KEY_2)
+		fdf->projection_type = PROJECTION_PARALLEL;
+	else if (keycode == KEY_3)
+		fdf->projection_type = PROJECTION_CABINET;
+	else if (keycode == KEY_4)
+		fdf->projection_type = PROJECTION_PERSPECTIVE;
+
+		mlx_clear_window(fdf->mlx, fdf->window);
 	draw_map(fdf);
 	return (0);
 }
