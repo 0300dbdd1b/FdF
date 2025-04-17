@@ -8,6 +8,7 @@
 
 
 
+
 t_point project_iso(t_fdf *fdf, t_point p)
 {
 	t_point rotated;
@@ -19,7 +20,7 @@ t_point project_iso(t_fdf *fdf, t_point p)
 
 	double x = p.x - center_x;
 	double y = p.y - center_y;
-	double z = p.z - center_z;
+	double z = (p.z - center_z) * fdf->z_scale;
 
 	double rx = fdf->x_angle;
 	double ry = fdf->y_angle;
@@ -37,10 +38,10 @@ t_point project_iso(t_fdf *fdf, t_point p)
 	double x3 = x2 * cos(rz) - y1 * sin(rz);
 	double y3 = x2 * sin(rz) + y1 * cos(rz);
 
-	// Apply zoom and scale
+	// Apply zoom
 	double zoomed_x = x3 * fdf->zoom;
 	double zoomed_y = y3 * fdf->zoom;
-	double zoomed_z = z2 * fdf->z_scale;
+	double zoomed_z = z2 * fdf->zoom; // (optionnel: tu peux garder z2 directement)
 
 	// Isometric projection (30°)
 	double angle = 0.523599;
@@ -49,6 +50,7 @@ t_point project_iso(t_fdf *fdf, t_point p)
 
 	return projected;
 }
+
 
 
 

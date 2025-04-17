@@ -7,11 +7,11 @@ int	init_fdf(t_fdf *fdf)
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 		return (write(2, "MLX init error\n", 15), 1);
-	fdf->window = mlx_new_window(fdf->mlx, 1920, 1080, "FdF");
+	fdf->window = mlx_new_window(fdf->mlx, 1000, 1000, "FdF");
 	if (!fdf->window)
 		return (write(2, "Window error\n", 13), 1);
-	fdf->window_width = 1920;
-	fdf->window_height = 1080;
+	fdf->window_width = 1000;
+	fdf->window_height = 1000;
 	fdf->use_color = 1;
 	fdf->z_max = INT_MIN;
 	fdf->z_min = INT_MAX;
@@ -19,7 +19,7 @@ int	init_fdf(t_fdf *fdf)
 	fdf->y_angle = 0;
 	fdf->z_angle = 0;
 	fdf->zoom	= 10;
-	fdf->z_scale = 10;
+	fdf->z_scale = 0.1;
 	fdf->x_offset = fdf->window_width / 2;
 	fdf->y_offset = fdf->window_height / 2;
 	fdf->img = mlx_new_image(fdf->mlx, fdf->window_width, fdf->window_height);
@@ -43,4 +43,5 @@ int	main(int argc, char **argv)
 	mlx_loop(fdf->mlx);
 	return (0);
 }
+
 

@@ -28,9 +28,9 @@ int	handle_key(int keycode, t_fdf *fdf)
 
 	// Altitude scale
 	if (keycode == KEY_W)
-		fdf->z_scale += 0.5;
+		fdf->z_scale += 0.1;
 	if (keycode == KEY_S)
-		fdf->z_scale -= 0.5;
+		fdf->z_scale -= 0.1;
 
 	// Rotation
 	#define ROTATE_STEP 0.05
