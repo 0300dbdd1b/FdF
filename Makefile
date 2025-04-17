@@ -15,23 +15,23 @@ LIBFT_BIN	= $(LIBFT_DIR)/libft.a
 
 ifeq ($(IS_MACOS),Darwin)
 	PLATFORM	= macos
-	NAME		= FdF
+	NAME		= fdf
 	MLX_DIR		= libs/minilibx-macos
 	MLX_BIN		= $(MLX_DIR)/libmlx.a
 
 	CFLAGS		= 
-	FRAMEWORKS	= -framework OpenGL -framework AppKit
+	FRAMEWORKS	= -framework OpenGL -framework AppKit -lm
 	LDFLAGS		= $(MLX_DIR) $(FRAMEWORKS)
 endif
 
 ifeq ($(IS_LINUX),Linux)
 	PLATFORM	= linux
-	NAME		= FdF
+	NAME		= fdf
 	MLX_DIR		= libs/minilibx-linux
 	MLX_BIN		= $(MLX_DIR)/libmlx.a
 
 	CFLAGS		=
-	LDFLAGS		= $(MLX_DIR) -lX11
+	LDFLAGS		= $(MLX_DIR) -lX11 -lm
 endif
 
 ifndef PLATFORM
