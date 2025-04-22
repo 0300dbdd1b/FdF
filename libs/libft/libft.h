@@ -13,6 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define OPEN_MAX 256
 # include <stddef.h>	// size_t
 # include <unistd.h>	// write
 # include <stdlib.h>	// malloc, free

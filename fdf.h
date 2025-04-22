@@ -134,6 +134,66 @@ typedef enum e_KEYCODE
 	KEY_SHIFT_R  = 258,
 	KEY_CTRL     = 256,
 }	t_KEYCODE;
+
+#elif defined(__linux__)
+typedef enum e_KEYCODE
+{
+	// Directional arrows
+	KEY_LEFT     = 65361,
+	KEY_RIGHT    = 65363,
+	KEY_DOWN     = 65364,
+	KEY_UP       = 65362,
+	// Numpad keys
+	KEY_PLUS     = 65451,  // KP_Add
+	KEY_MINUS    = 65453,  // KP_Subtract
+	// Letters (A–Z)
+	KEY_A        = 97,
+	KEY_B        = 98,
+	KEY_C        = 99,
+	KEY_D        = 100,
+	KEY_E        = 101,
+	KEY_F        = 102,
+	KEY_G        = 103,
+	KEY_H        = 104,
+	KEY_I        = 105,
+	KEY_J        = 106,
+	KEY_K        = 107,
+	KEY_L        = 108,
+	KEY_M        = 109,
+	KEY_N        = 110,
+	KEY_O        = 111,
+	KEY_P        = 112,
+	KEY_Q        = 113,
+	KEY_R        = 114,
+	KEY_S        = 115,
+	KEY_T        = 116,
+	KEY_U        = 117,
+	KEY_V        = 118,
+	KEY_W        = 119,
+	KEY_X        = 120,
+	KEY_Y        = 121,
+	KEY_Z        = 122,
+	// Numbers (top row, not numpad)
+	KEY_1        = 49,
+	KEY_2        = 50,
+	KEY_3        = 51,
+	KEY_4        = 52,
+	KEY_5        = 53,
+	KEY_6        = 54,
+	KEY_7        = 55,
+	KEY_8        = 56,
+	KEY_9        = 57,
+	KEY_0        = 48,
+	// Special
+	KEY_ESC      = 65307,
+	KEY_SPACE    = 32,
+	KEY_TAB      = 65289,
+	KEY_RETURN   = 65293,
+	KEY_DELETE   = 65535,
+	KEY_SHIFT_L  = 65505,
+	KEY_SHIFT_R  = 65506,
+	KEY_CTRL     = 65507,  // Left Control
+}	t_KEYCODE;
 #endif
 
 

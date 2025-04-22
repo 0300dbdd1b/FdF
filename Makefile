@@ -32,7 +32,7 @@ ifeq ($(IS_LINUX),Linux)
 	MLX_BIN		= $(MLX_DIR)/libmlx.a
 
 	CFLAGS		=
-	LDFLAGS		= $(MLX_DIR) -lX11 -lm
+	LDFLAGS		= $(MLX_DIR) -lX11 -lXext -lm 
 endif
 
 ifndef PLATFORM
