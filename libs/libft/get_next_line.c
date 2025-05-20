@@ -6,14 +6,12 @@
 /*   By: noaddino <noaddino@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:02:53 by noaddino          #+#    #+#             */
-/*   Updated: 2025/04/10 17:06:01 by noaddino         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:38:42 by noaddino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
-
-
 
 size_t	ft_strlen_gnl(char *s);
 char	*ft_strchr_gnl(char *s, int c);

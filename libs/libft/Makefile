@@ -50,13 +50,22 @@ SRC     =	ft_isalpha.c	\
 			get_next_line_utils.c		\
 			ft_strcpy.c					\
 			ft_strcat.c					\
+			ft_malloc.c					\
+			ft_free.c					\
+			ft_realloc.c				\
+			lazy-allocator.c			\
 
 
 OBJS		= $(SRC:.c=.o)
-CC      = cc
-CFLAGS  = -Wall -Wextra -Werror
-AR      = ar rcs
-RM      = rm -f
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+LDFLAGS		=
+
+DEBUG_CFLAGS	= -pedantic-errors -fsanitize=address,undefined
+DEBUG_LDFLAGS	= -fsanitize=address,undefined
+
+AR			= ar rcs
+RM			= rm -f
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -73,3 +82,6 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+debug: fclean
+	$(MAKE) CFLAGS="$(CFLAGS) $(DEBUG_CFLAGS)" LDFLAGS="$(LDFLAGS) $(DEBUG_LDFLAGS)" all
